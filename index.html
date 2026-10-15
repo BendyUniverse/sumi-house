@@ -3,510 +3,1484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>• SUMI HOUSE • Правила и критерии</title>
+    <meta name="theme-color" content="#101c24">
+    <meta name="description" content="SUMI HOUSE — правила сообщества и критерии оценки творческих работ.">
+    <title>SUMI HOUSE — правила и оценка работ</title>
     <style>
         :root {
-            --bg-color: #1a1625;
-            --sidebar-bg: #221c33;
-            --card-bg: #2d2444;
-            --accent-color: #ff94b8;
-            --text-color: #f3effa;
-            --text-muted: #bdafda;
-            --border-color: #443766;
-            --hover-color: #3b2f5c;
+            color-scheme: dark;
+            --bg: #101c24;
+            --bg-deep: #0b141b;
+            --panel: rgba(23, 39, 48, .76);
+            --panel-strong: rgba(27, 46, 56, .94);
+            --text: #f2fbfa;
+            --muted: #a8c1c3;
+            --line: rgba(180, 222, 220, .13);
+            --teal: #65e6d2;
+            --pink: #ff9fc9;
+            --green: #a6efad;
+            --shadow: 0 24px 70px rgba(0, 0, 0, .24);
+            --radius: 22px;
         }
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 24px;
         }
 
         body {
+            margin: 0;
             min-height: 100vh;
-            display: flex;
             overflow-x: hidden;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background:
+                radial-gradient(ellipse at 10% 4%, rgba(101, 230, 210, .10), transparent 34%),
+                radial-gradient(ellipse at 92% 26%, rgba(255, 159, 201, .09), transparent 31%),
+                radial-gradient(ellipse at 70% 94%, rgba(166, 239, 173, .08), transparent 36%),
+                var(--bg);
+            color: var(--text);
+            font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+            line-height: 1.65;
+        }
+
+        body::before,
+        body::after {
+            position: fixed;
+            z-index: -1;
+            width: 360px;
+            height: 360px;
+            content: "";
+            border-radius: 50%;
+            filter: blur(85px);
+            opacity: .25;
+            pointer-events: none;
+            animation: drift 18s ease-in-out infinite alternate;
+        }
+
+        body::before {
+            top: 8%;
+            left: -150px;
+            background: var(--teal);
+        }
+
+        body::after {
+            right: -150px;
+            bottom: 2%;
+            background: var(--pink);
+            animation-delay: -8s;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .site-shell {
+            width: min(1440px, 100%);
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 46px;
+            height: 46px;
+            flex: 0 0 auto;
+            place-items: center;
+            border: 1px solid rgba(101, 230, 210, .35);
+            border-radius: 16px;
+            background: linear-gradient(145deg, rgba(101, 230, 210, .22), rgba(255, 159, 201, .16));
+            box-shadow: 0 8px 28px rgba(101, 230, 210, .09);
+            font-size: 23px;
+        }
+
+        .brand-name {
+            display: block;
+            font-size: 17px;
+            font-weight: 850;
+            letter-spacing: .12em;
+        }
+
+        .brand-subtitle {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .top-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .035);
+            color: var(--muted);
+            font-size: 12px;
+            white-space: nowrap;
+            backdrop-filter: blur(14px);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 12px rgba(166, 239, 173, .8);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(28px, 5vw, 64px);
+            border: 1px solid rgba(180, 222, 220, .16);
+            border-radius: 32px;
+            background:
+                linear-gradient(115deg, rgba(101, 230, 210, .10), transparent 45%),
+                linear-gradient(300deg, rgba(255, 159, 201, .10), transparent 42%),
+                rgba(17, 31, 40, .78);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(22px);
+            isolation: isolate;
+        }
+
+        .hero::after {
+            position: absolute;
+            z-index: -1;
+            top: -100px;
+            right: -55px;
+            width: 330px;
+            height: 330px;
+            border: 1px solid rgba(101, 230, 210, .20);
+            border-radius: 43% 57% 62% 38% / 45% 42% 58% 55%;
+            background: linear-gradient(145deg, rgba(101, 230, 210, .08), rgba(255, 159, 201, .08));
+            content: "";
+            animation: morph 14s ease-in-out infinite alternate;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 18px;
+            color: var(--teal);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 24px;
+            height: 1px;
+            background: currentColor;
+            content: "";
+        }
+
+        h1 {
+            max-width: 760px;
+            margin: 0;
+            font-size: clamp(38px, 7vw, 76px);
+            font-weight: 850;
+            letter-spacing: -.055em;
+            line-height: 1.02;
+        }
+
+        .gradient-text {
+            color: transparent;
+            background: linear-gradient(90deg, var(--teal), var(--pink) 58%, var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .hero-copy {
+            max-width: 660px;
+            margin: 22px 0 0;
+            color: #c3d7d9;
+            font-size: clamp(15px, 2vw, 18px);
+        }
+
+        .hero-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 26px;
+        }
+
+        .chip {
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .04);
+            color: #d8e8e8;
+            font-size: 12px;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 290px minmax(0, 1fr);
+            align-items: start;
+            gap: 22px;
+            margin-top: 24px;
+        }
+
+        .sidebar,
+        .content-panel {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--panel);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(22px);
         }
 
         .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            width: 320px;
-            background-color: var(--sidebar-bg);
-            border-right: 2px solid var(--border-color);
+            position: sticky;
+            top: 18px;
+            overflow: hidden;
+            padding: 16px;
         }
 
-        .sidebar-header {
-            padding: 25px;
-            text-align: center;
-            border-bottom: 2px solid var(--border-color);
+        .tab-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            padding: 5px;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, .16);
         }
 
-        .sidebar-header h1 {
-            margin-bottom: 5px;
-            color: var(--accent-color);
-            font-size: 24px;
-            text-shadow: 0 0 10px rgba(255, 148, 184, 0.3);
-        }
-
-        .sidebar-header p {
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        .tabs-menu {
-            display: flex;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 15px 10px;
-            border: none;
-            background: none;
-            color: var(--text-muted);
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
+        .tab-button {
+            min-height: 44px;
+            padding: 9px 10px;
+            border: 0;
+            border-radius: 11px;
+            background: transparent;
+            color: var(--muted);
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 12px;
+            font-weight: 750;
+            transition: background .25s ease, color .25s ease, transform .25s ease;
         }
 
-        .tab-btn.active {
-            border-bottom: 3px solid var(--accent-color);
-            background-color: var(--bg-color);
-            color: var(--accent-color);
+        .tab-button:hover {
+            color: var(--text);
         }
 
-        .nav-scroll-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
+        .tab-button.active {
+            background: linear-gradient(120deg, rgba(101, 230, 210, .19), rgba(255, 159, 201, .13));
+            color: var(--text);
+            box-shadow: inset 0 0 0 1px rgba(101, 230, 210, .20);
+        }
+
+        .sidebar-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin: 22px 4px 10px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .count {
+            display: inline-grid;
+            min-width: 25px;
+            height: 25px;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--teal);
+            font-size: 11px;
+            letter-spacing: 0;
+        }
+
+        .search-wrap {
+            position: relative;
+            margin: 14px 0 8px;
+        }
+
+        .search-wrap span {
+            position: absolute;
+            top: 50%;
+            left: 13px;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px 10px 38px;
+            outline: none;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: rgba(4, 13, 18, .30);
+            color: var(--text);
+            font-size: 13px;
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+
+        .search-input:focus {
+            border-color: rgba(101, 230, 210, .65);
+            box-shadow: 0 0 0 3px rgba(101, 230, 210, .08);
         }
 
         .nav-list {
-            display: none;
+            display: grid;
+            gap: 4px;
+            max-height: min(52vh, 560px);
+            overflow: auto;
+            margin: 0;
+            padding: 0 3px 3px 0;
             list-style: none;
-        }
-
-        .nav-list.active {
-            display: block;
-        }
-
-        .nav-item {
-            margin-bottom: 8px;
+            scrollbar-color: rgba(101, 230, 210, .28) transparent;
+            scrollbar-width: thin;
         }
 
         .nav-link {
-            display: block;
-            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 11px;
             border: 1px solid transparent;
-            border-radius: 8px;
-            color: var(--text-color);
-            font-size: 14px;
+            border-radius: 12px;
+            background: transparent;
+            color: #c3d5d7;
+            text-align: left;
             text-decoration: none;
-            transition: all 0.2s ease;
+            font-size: 13px;
+            line-height: 1.35;
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
         }
 
         .nav-link:hover {
-            border-color: var(--border-color);
-            background-color: var(--hover-color);
-            color: var(--accent-color);
+            transform: translateX(2px);
+            background: rgba(255, 255, 255, .04);
+            color: var(--text);
         }
 
-        .main-content {
-            flex: 1;
-            max-width: 1000px;
-            margin-left: 320px;
-            padding: 40px;
+        .nav-link.active {
+            border-color: rgba(101, 230, 210, .17);
+            background: linear-gradient(100deg, rgba(101, 230, 210, .12), rgba(255, 159, 201, .055));
+            color: var(--teal);
         }
 
-        .content-section {
-            display: none;
+        .nav-number {
+            display: grid;
+            width: 25px;
+            height: 25px;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .055);
+            color: var(--pink);
+            font-size: 11px;
+            font-weight: 800;
         }
 
-        .content-section.active {
+        .sidebar-note {
+            margin-top: 16px;
+            padding: 13px;
+            border: 1px solid rgba(166, 239, 173, .13);
+            border-radius: 14px;
+            background: rgba(166, 239, 173, .045);
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .sidebar-note strong {
             display: block;
-            animation: fadeIn 0.4s ease;
+            margin-bottom: 4px;
+            color: var(--green);
         }
 
-        @keyframes fadeIn {
+        .content-panel {
+            min-width: 0;
+            padding: clamp(18px, 3vw, 32px);
+        }
+
+        .section-view {
+            display: none;
+            animation: rise .45s ease both;
+        }
+
+        .section-view.active {
+            display: block;
+        }
+
+        .section-header {
+            margin-bottom: 22px;
+            padding-bottom: 23px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-kicker {
+            margin: 0 0 8px;
+            color: var(--pink);
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: clamp(25px, 4vw, 38px);
+            font-weight: 820;
+            letter-spacing: -.04em;
+            line-height: 1.15;
+        }
+
+        .section-description {
+            max-width: 740px;
+            margin: 13px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            margin: 18px 0 22px;
+            padding: 17px;
+            border: 1px solid rgba(101, 230, 210, .19);
+            border-radius: 16px;
+            background: linear-gradient(105deg, rgba(101, 230, 210, .08), rgba(255, 159, 201, .045));
+            color: #d8e8e8;
+            font-size: 13px;
+        }
+
+        .notice-icon {
+            display: grid;
+            width: 34px;
+            height: 34px;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 11px;
+            background: rgba(101, 230, 210, .12);
+            color: var(--teal);
+        }
+
+        .category-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .category-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            background: rgba(6, 17, 23, .25);
+            scroll-margin-top: 18px;
+            transition: border-color .25s ease, background .25s ease, transform .25s ease;
+        }
+
+        .category-card:hover {
+            border-color: rgba(101, 230, 210, .25);
+            background: rgba(255, 255, 255, .025);
+        }
+
+        .category-card.open {
+            border-color: rgba(101, 230, 210, .30);
+            background: rgba(101, 230, 210, .025);
+        }
+
+        .category-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            width: 100%;
+            padding: 19px 20px;
+            border: 0;
+            background: transparent;
+            color: var(--text);
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .category-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .category-index {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            flex: 0 0 auto;
+            place-items: center;
+            border: 1px solid rgba(255, 159, 201, .20);
+            border-radius: 12px;
+            background: rgba(255, 159, 201, .08);
+            color: var(--pink);
+            font-size: 12px;
+            font-weight: 850;
+        }
+
+        .category-title {
+            display: block;
+            font-size: 15px;
+            font-weight: 760;
+            line-height: 1.35;
+        }
+
+        .category-subtitle {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 450;
+        }
+
+        .chevron {
+            flex: 0 0 auto;
+            color: var(--teal);
+            font-size: 18px;
+            transition: transform .25s ease;
+        }
+
+        .category-card.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        .category-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .32s ease;
+        }
+
+        .category-card.open .category-content {
+            grid-template-rows: 1fr;
+        }
+
+        .category-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .rules-list {
+            margin: 0;
+            padding: 0 22px 22px 71px;
+            color: #d6e5e6;
+            font-size: 14px;
+        }
+
+        .rules-list li {
+            margin: 0 0 13px;
+            padding-left: 3px;
+        }
+
+        .rules-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .rules-list li::marker {
+            color: var(--teal);
+        }
+
+        .rule-note {
+            margin: 14px 0;
+            padding: 13px 15px;
+            border-left: 3px solid var(--pink);
+            border-radius: 0 12px 12px 0;
+            background: rgba(255, 159, 201, .06);
+            color: #d8cbd5;
+            font-size: 13px;
+        }
+
+        .rating-scale {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 9px;
+            margin: 12px 0 2px;
+        }
+
+        .rating-item {
+            min-height: 105px;
+            padding: 13px 10px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .025);
+        }
+
+        .rating-score {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--teal);
+            font-size: 17px;
+            font-weight: 850;
+        }
+
+        .rating-description {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
+        .group-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .group-card {
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .025);
+        }
+
+        .group-card:nth-child(1) .group-label {
+            color: var(--teal);
+        }
+
+        .group-card:nth-child(2) .group-label {
+            color: var(--pink);
+        }
+
+        .group-card:nth-child(3) .group-label {
+            color: var(--green);
+        }
+
+        .group-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .group-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .empty-state {
+            display: none;
+            padding: 35px 15px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .empty-state.visible {
+            display: block;
+        }
+
+        .footer {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 25px 4px 8px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .footer strong {
+            color: var(--pink);
+        }
+
+        .back-top {
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .035);
+            color: var(--text);
+            text-decoration: none;
+            transition: border-color .2s ease;
+        }
+
+        .back-top:hover {
+            border-color: rgba(101, 230, 210, .45);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            min-height: 44px;
+            margin-top: 16px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, .04);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .reveal {
+            animation: rise .55s ease both;
+        }
+
+        @keyframes rise {
             from {
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .section-intro {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-left: 4px solid var(--accent-color);
-            border-radius: 0 12px 12px 0;
-            background-color: var(--card-bg);
-            line-height: 1.6;
+        @keyframes drift {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            to {
+                transform: translate3d(55px, -35px, 0) scale(1.15);
+            }
         }
 
-        .section-intro p {
-            margin-bottom: 10px;
+        @keyframes morph {
+            from {
+                transform: rotate(0deg) scale(1);
+                border-radius: 43% 57% 62% 38% / 45% 42% 58% 55%;
+            }
+            to {
+                transform: rotate(22deg) scale(1.08);
+                border-radius: 58% 42% 39% 61% / 54% 62% 38% 46%;
+            }
         }
 
-        .section-intro p:last-child {
-            margin-bottom: 0;
+        @media (max-width: 980px) {
+            .site-shell {
+                padding: 18px;
+            }
+
+            .workspace {
+                grid-template-columns: 250px minmax(0, 1fr);
+                gap: 16px;
+            }
+
+            .rating-scale {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
         }
 
-        .category-card {
-            margin-bottom: 15px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background-color: var(--card-bg);
-            scroll-margin-top: 20px;
-        }
+        @media (max-width: 760px) {
+            .site-shell {
+                padding: 12px;
+            }
 
-        .category-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.2s ease;
-        }
+            .topbar {
+                margin-bottom: 14px;
+            }
 
-        .category-header:hover {
-            background-color: var(--hover-color);
-        }
+            .top-pill {
+                padding: 8px 10px;
+                font-size: 11px;
+            }
 
-        .category-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--accent-color);
-            font-size: 18px;
-            font-weight: 600;
-        }
+            .brand-mark {
+                width: 41px;
+                height: 41px;
+                border-radius: 14px;
+            }
 
-        .category-icon {
-            flex-shrink: 0;
-            font-size: 14px;
-            transition: transform 0.3s ease;
-        }
+            .brand-name {
+                font-size: 14px;
+            }
 
-        .category-card.open .category-icon {
-            transform: rotate(180deg);
-        }
+            .brand-subtitle {
+                font-size: 11px;
+            }
 
-        .category-content {
-            max-height: 0;
-            overflow: hidden;
-            border-top: 1px solid transparent;
-            background-color: rgba(26, 22, 37, 0.4);
-            transition: max-height 0.3s ease-out;
-        }
+            .hero {
+                padding: 29px 22px;
+                border-radius: 24px;
+            }
 
-        .category-card.open .category-content {
-            max-height: 2000px;
-            border-top-color: var(--border-color);
-            transition: max-height 0.5s ease-in;
-        }
+            .hero::after {
+                top: -145px;
+                right: -170px;
+                width: 290px;
+                height: 290px;
+            }
 
-        .rules-list {
-            padding: 20px;
-            list-style: none;
-        }
+            .hero-copy {
+                margin-top: 16px;
+            }
 
-        .rules-list li {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed rgba(68, 55, 102, 0.4);
-            font-size: 15px;
-            line-height: 1.6;
-        }
+            .hero-chips {
+                gap: 7px;
+                margin-top: 19px;
+            }
 
-        .rules-list li:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
+            .chip {
+                padding: 7px 9px;
+                font-size: 11px;
+            }
 
-        .rules-list strong {
-            color: var(--accent-color);
-        }
-
-        .commentary {
-            display: block;
-            margin-top: 8px;
-            padding: 10px;
-            border-left: 3px solid var(--border-color);
-            border-radius: 6px;
-            background-color: rgba(34, 28, 51, 0.6);
-            color: var(--text-muted);
-            font-size: 14px;
-            font-style: italic;
-        }
-
-        .badge-tw {
-            padding: 2px 6px;
-            border-radius: 4px;
-            background-color: #ff5555;
-            color: white;
-            font-size: 12px;
-            font-style: normal;
-            font-weight: bold;
-        }
-
-        .footer {
-            margin-top: 5px;
-            padding: 20px;
-            border-top: 1px dashed var(--border-color);
-            color: var(--text-muted);
-            font-size: 14px;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
+            .workspace {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 12px;
+                margin-top: 14px;
             }
 
             .sidebar {
-                position: relative;
-                width: 100%;
-                border-right: none;
-                border-bottom: 2px solid var(--border-color);
+                position: static;
+                padding: 12px;
             }
 
-            .main-content {
-                margin-left: 0;
-                padding: 20px;
+            .mobile-menu-button {
+                display: flex;
             }
 
-            .nav-scroll-area {
-                max-height: 200px;
+            .nav-area {
+                display: none;
+            }
+
+            .sidebar.menu-open .nav-area {
+                display: block;
+            }
+
+            .sidebar-heading {
+                margin-top: 17px;
+            }
+
+            .nav-list {
+                max-height: 330px;
+            }
+
+            .sidebar-note {
+                display: none;
+            }
+
+            .content-panel {
+                padding: 17px 13px;
+                border-radius: 19px;
+            }
+
+            .section-header {
+                margin-bottom: 17px;
+                padding-bottom: 18px;
+            }
+
+            .notice {
+                gap: 10px;
+                padding: 13px;
+                font-size: 12px;
+            }
+
+            .category-toggle {
+                gap: 10px;
+                padding: 15px 12px;
+            }
+
+            .category-title-wrap {
+                gap: 10px;
+            }
+
+            .category-index {
+                width: 33px;
+                height: 33px;
+                border-radius: 10px;
+            }
+
+            .category-title {
+                font-size: 13px;
+            }
+
+            .category-subtitle {
+                font-size: 10px;
+            }
+
+            .rules-list {
+                padding: 0 14px 18px 42px;
+                font-size: 13px;
+            }
+
+            .rating-scale {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .group-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .group-card {
+                padding: 13px;
+            }
+
+            .footer {
+                padding-top: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
             }
         }
     </style>
 </head>
-<body>
-    <!-- БОКОВОЕ МЕНЮ -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <h1>• SUMI HOUSE •</h1>
-            <p>Официальный свод правил проекта</p>
-        </div>
+<body id="top">
+    <div class="site-shell">
+        <header class="topbar">
+            <a class="brand" href="#top" aria-label="SUMI HOUSE — на главную">
+                <span class="brand-mark" aria-hidden="true">🐾</span>
+                <span>
+                    <span class="brand-name">SUMI HOUSE</span>
+                    <span class="brand-subtitle">правила · творчество · поддержка</span>
+                </span>
+            </a>
+            <div class="top-pill"><span class="status-dot"></span> Официальный свод</div>
+        </header>
 
-        <div class="tabs-menu">
-            <button class="tab-btn active" type="button" onclick="switchSection('chat-rules', this)">
-                Правила чата
-            </button>
-            <button class="tab-btn" type="button" onclick="switchSection('work-rules', this)">
-                Оценка работ
-            </button>
-        </div>
-
-        <nav class="nav-scroll-area" aria-label="Навигация по правилам">
-            <ul id="nav-chat-rules" class="nav-list active">
-                <li class="nav-item"><a href="#chat-cat-1" class="nav-link">1. Общие положения</a></li>
-                <li class="nav-item"><a href="#chat-cat-2" class="nav-link">2. Оскорбления и агрессия</a></li>
-                <li class="nav-item"><a href="#chat-cat-3" class="nav-link">3. Спам и флуд</a></li>
-                <li class="nav-item"><a href="#chat-cat-4" class="nav-link">4. Реклама</a></li>
-                <li class="nav-item"><a href="#chat-cat-5" class="nav-link">5. Спорные темы</a></li>
-                <li class="nav-item"><a href="#chat-cat-6" class="nav-link">6. Нецензурная лексика</a></li>
-                <li class="nav-item"><a href="#chat-cat-7" class="nav-link">7. Пренебрежение</a></li>
-                <li class="nav-item"><a href="#chat-cat-8" class="nav-link">8. Обсуждение творчества</a></li>
-                <li class="nav-item"><a href="#chat-cat-9" class="nav-link">9. Личная информация</a></li>
-                <li class="nav-item"><a href="#chat-cat-10" class="nav-link">10. Тревожный контент</a></li>
-                <li class="nav-item"><a href="#chat-cat-11" class="nav-link">11. Шокирующий контент</a></li>
-                <li class="nav-item"><a href="#chat-cat-12" class="nav-link">12. Поведение в чате</a></li>
-                <li class="nav-item"><a href="#chat-cat-13" class="nav-link">13. Администрация</a></li>
-            </ul>
-
-            <ul id="nav-work-rules" class="nav-list">
-                <li class="nav-item"><a href="#work-cat-1" class="nav-link">1. Выполнение задания</a></li>
-                <li class="nav-item"><a href="#work-cat-2" class="nav-link">2. Аккуратность работы</a></li>
-                <li class="nav-item"><a href="#work-cat-3" class="nav-link">3. Анатомия и построение</a></li>
-                <li class="nav-item"><a href="#work-cat-4" class="nav-link">4. Композиция</a></li>
-                <li class="nav-item"><a href="#work-cat-5" class="nav-link">5. Цвет и палитра</a></li>
-                <li class="nav-item"><a href="#work-cat-6" class="nav-link">6. Свет и объём</a></li>
-                <li class="nav-item"><a href="#work-cat-7" class="nav-link">7. Самостоятельность</a></li>
-                <li class="nav-item"><a href="#work-cat-8" class="nav-link">8. Старательность</a></li>
-                <li class="nav-item"><a href="#work-scale" class="nav-link">📝 Шкала оценок</a></li>
-                <li class="nav-item"><a href="#work-groups" class="nav-link">👥 Группы участников</a></li>
-            </ul>
-        </nav>
-    </aside>
-
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
-    <main class="main-content">
-        <section id="chat-rules" class="content-section active">
-            <div class="section-intro">
-                <h2>🐾 Администрация приветствует вас! 🐾</h2>
-                <p>
-                    Свод правил чата проекта SUMI HOUSE создан для поддержания
-                    комфортного общения и дружеской атмосферы.
+        <main>
+            <section class="hero reveal" aria-labelledby="hero-title">
+                <p class="eyebrow">Добро пожаловать в наш хаус</p>
+                <h1 id="hero-title">Место, где <span class="gradient-text">растут вместе.</span></h1>
+                <p class="hero-copy">
+                    Здесь собраны правила SUMI HOUSE и критерии оценки творческих работ.
+                    Ознакомься с ними, чтобы нам всем было комфортно общаться, творить и развиваться.
                 </p>
-                <p>
-                    Пожалуйста, ознакомьтесь с правилами и уважайте других участников.
-                </p>
+                <div class="hero-chips" aria-label="Разделы сайта">
+                    <span class="chip">✦ 13 правил чата</span>
+                    <span class="chip">✎ 8 критериев оценки</span>
+                    <span class="chip">♡ Поддерживающая атмосфера</span>
+                </div>
+                <button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-expanded="false" aria-controls="navigationArea">
+                    ☰ Открыть навигацию
+                </button>
+            </section>
+
+            <div class="workspace">
+                <aside class="sidebar" id="sidebar" aria-label="Навигация по правилам">
+                    <div class="tab-switcher" role="tablist" aria-label="Раздел сайта">
+                        <button class="tab-button active" id="chatTab" type="button" role="tab" aria-selected="true" aria-controls="chatView" data-section="chat">Правила чата</button>
+                        <button class="tab-button" id="workTab" type="button" role="tab" aria-selected="false" aria-controls="workView" data-section="work">Оценка работ</button>
+                    </div>
+
+                    <div class="nav-area" id="navigationArea">
+                        <div class="search-wrap">
+                            <span aria-hidden="true">⌕</span>
+                            <input class="search-input" id="searchInput" type="search" placeholder="Найти в правилах..." aria-label="Поиск по разделам">
+                        </div>
+
+                        <div class="sidebar-heading">
+                            <span id="navHeading">Содержание</span>
+                            <span class="count" id="navCount">13</span>
+                        </div>
+                        <nav aria-label="Категории">
+                            <ul class="nav-list" id="navList"></ul>
+                        </nav>
+
+                        <div class="sidebar-note">
+                            <strong>♡ Небольшое напоминание</strong>
+                            Незнание правил не освобождает от ответственности. Спасибо, что помогаете сохранять комфортную атмосферу!
+                        </div>
+                    </div>
+                </aside>
+
+                <section class="content-panel" aria-live="polite">
+                    <div class="section-view active" id="chatView" role="tabpanel" aria-labelledby="chatTab">
+                        <header class="section-header">
+                            <p class="section-kicker">Раздел 01 · Общение</p>
+                            <h2>Правила чата</h2>
+                            <p class="section-description">
+                                Свод правил для комфортного общения, уважительного отношения и дружеской атмосферы в SUMI HOUSE.
+                            </p>
+                        </header>
+
+                        <div class="notice">
+                            <span class="notice-icon" aria-hidden="true">✦</span>
+                            <div>
+                                <strong>Приветствуем тебя в SUMI HOUSE!</strong><br>
+                                Мы рады, что ты выбрал(а) именно нас. Если возникнут вопросы по правилам, можно обратиться к администрации или владельцу хауса.
+                            </div>
+                        </div>
+
+                        <div class="category-list" id="chatCategories">
+                            <article class="category-card open" id="chat-cat-1" data-category="chat" data-title="Общие положения">
+                                <button class="category-toggle" type="button" aria-expanded="true">
+                                    <span class="category-title-wrap"><span class="category-index">01</span><span><span class="category-title">Общие положения</span><span class="category-subtitle">Основы участия в хаусе</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Незнание правил не освобождает от ответственности за их нарушение.</li>
+                                    <li>Находясь в SUMI хаусе, вы автоматически соглашаетесь с действующими правилами.</li>
+                                    <li>Удаление сообщений не гарантирует уход от ответственности. В определенных случаях администрация может вынести наказание даже за удаленные вами сообщения.</li>
+                                    <li>Использование «созыва» (упоминание всех участников) без прав администратора строго запрещено. Варн может быть выдан в случае случайного упоминания в том числе.</li>
+                                    <li>Провоцировать администрацию на выдачу наказаний (просить варн, бан, мут) или намеренно флудить для их получения быстро приведет вас к тому, чего вы и добивались, — бану.</li>
+                                    <li>Выпрашивать права администратора без какого-либо основания бессмысленно. Только Владелец имеет право выдавать должности участникам, что происходит исключительно по его рассмотрению. Если хотите получить административные права — зарекомендуйте себя владельцу.</li>
+                                    <li>Администрация и владелец хауса имеют право выдать варн, мут или бан по своему усмотрению. Если поведение участника нарушает комфортное общение в чате, администратор может выдать любое из наказаний в зависимости от серьезности нарушения, даже если конкретная ситуация не прописана в правилах.</li>
+                                    <li>При повторных нарушениях наказание может быть жестче.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-2" data-category="chat" data-title="Оскорбления и агрессивное поведение">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">02</span><span><span class="category-title">Оскорбления и агрессивное поведение</span><span class="category-subtitle">Уважение к участникам</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Запрещены оскорбления, унижения, угрозы, пассивная агрессия, провокации и грубое отношение к участникам или администрации хауса. В зависимости от серьезности произошедшего вам выдадут предупреждение или забанят.</li>
+                                    <li>Пренебрежительное отношение к новым участникам запрещено: язвительные фразы, насмешки, грубые комментарии, провокационные сообщения, а также аналогичный контент в виде GIF, стикеров или мемов.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-3" data-category="chat" data-title="Спам и флуд">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">03</span><span><span class="category-title">Спам и флуд</span><span class="category-subtitle">Сообщения и активность в чате</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Четыре и более сообщений подряд без необходимости могут считаться флудом.</li>
+                                </ol><div class="rule-note">Флуд — это не только разделение одного предложения на несколько сообщений. Это также случай, когда человек не объединяет мысли в 2–3 предложения, а разбивает их на 5–6 коротких.</div><ol class="rules-list" start="2">
+                                    <li>Большое количество GIF, стикеров, видео, голосовых сообщений, кружков или повторяющихся сообщений за короткий промежуток времени считается спамом.</li>
+                                    <li>Три и более команды бота подряд от одного участника считаются флудом.</li>
+                                </ol><div class="rule-note">Допускается отправка длинной мысли несколькими сообщениями, если это удобно для чтения.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-4" data-category="chat" data-title="Реклама">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">04</span><span><span class="category-title">Реклама</span><span class="category-subtitle">Ссылки и продвижение</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Разрешены ссылки на личные аккаунты, социальные сети, приложения или личные Telegram-каналы, если это не связано с продвижением.</li>
+                                    <li>Пересылка из своего ТГК в чат хауса фото, видео или каких-либо сообщений разрешена, если это не является рекламой и не нарушает правила хауса.</li>
+                                    <li>Любая реклама в корыстных целях запрещена.</li>
+                                    <li>Продвижение чужих серверов, чатов, каналов, проектов или услуг допускается только с разрешения администрации.</li>
+                                    <li>Массовая рассылка ссылок участникам в личные сообщения с приглашением в сторонние проекты также считается рекламой.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-5" data-category="chat" data-title="Неприятные и спорные темы">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">05</span><span><span class="category-title">Неприятные и спорные темы</span><span class="category-subtitle">Темы, требующие осторожности</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Фетиш-контент в любом виде запрещён. Подобные кадры могут быть допустимы только в разумных пределах, не выходя за рамки адекватного поведения каждого участника.</li>
+                                    <li>Политические взгляды, религиозные ценности и другие спорные темы допускаются только как поверхностный диалог, без перехода в конфликт или дискуссию.</li>
+                                    <li>Полностью запрещён контент с провокационной символикой, флагами стран, поддерживающих нацизм, лозунгами или пропагандой.</li>
+                                    <li>Обсуждение порнографии и откровенно сексуальных тем в общем чате не приветствуется.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-6" data-category="chat" data-title="Нецензурная лексика">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">06</span><span><span class="category-title">Нецензурная лексика</span><span class="category-subtitle">Допустимые границы общения</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Матерные высказывания допускаются в разумных пределах. Чрезмерное использование нецензурной лексики не приветствуется.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-7" data-category="chat" data-title="Пренебрежение участниками">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">07</span><span><span class="category-title">Пренебрежение участниками</span><span class="category-subtitle">Вовлеченность и внимание</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Полное, намеренное игнорирование участника в диалоге считается пренебрежением. Старайтесь общаться все вместе.</li>
+                                    <li>Если вопрос участника игнорируется в течение длительного количества сообщений (например, 10 и более), это может считаться пренебрежением только в том случае, когда вопрос пропустили специально, даже если ответ на него вам известен.</li>
+                                    <li>Если общий чат превращается в закрытый личный диалог двух людей с игнорированием остальных участников, это пренебрежение.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-8" data-category="chat" data-title="Обсуждение творчества и работ участников">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">08</span><span><span class="category-title">Обсуждение творчества и работ участников</span><span class="category-subtitle">Тактичная обратная связь</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Деструктивная критика, грубое обсуждение или негативные высказывания о работе автора без его согласия запрещены.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-9" data-category="chat" data-title="Личная информация">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">09</span><span><span class="category-title">Личная информация</span><span class="category-subtitle">Приватность и согласие</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Запрещено распространять фотографии, видео, переписки, голосовые сообщения и любую личную информацию других участников без их согласия.</li>
+                                    <li>Запрещено публиковать чужие данные даже в шуточной форме.</li>
+                                    <li>Личные конфликты не выносятся в общий чат.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-10" data-category="chat" data-title="Тревожный контент">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">10</span><span><span class="category-title">Тревожный контент</span><span class="category-subtitle">Предупреждения TW и спойлеры</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Откровенная нагота обязательно должна быть скрыта под спойлером с пометкой TW: нагота.</li>
+                                </ol><div class="rule-note">Под «наготою» подразумевается изображение обнаженного тела без демонстрации гениталий. Если на изображении видны гениталии, такой контент расценивается как порнография.</div><ol class="rules-list" start="2">
+                                    <li>Изображения, содержащие кровь, также должны скрываться под спойлером с пометкой TW — предупреждение о кадрах не для слабонервных.</li>
+                                    <li>Запрещено публиковать контент сексуального характера (фото, видео, стикеры, GIF). Это касается изображений интимных товаров и любых других неподобающих материалов.</li>
+                                    <li>Порнографические материалы, гуро, изображения и видео с насилием над детьми или жестоким обращением с животными запрещены полностью. За публикацию запрещенного контента будет вынесено предупреждение. Мера применяется на усмотрение администрации в зависимости от тяжести нарушения.</li>
+                                </ol><div class="rule-note">Если сомневаетесь, стоит ли скрывать контент, лучше спрячьте его под спойлер заранее либо спросите мнение администрации. Исключение: материалы обнаженного человеческого тела в целях изучения строения и форм разрешены, так как относятся к научному интересу.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-11" data-category="chat" data-title="Шокирующий контент">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">11</span><span><span class="category-title">Шокирующий контент</span><span class="category-subtitle">Запрещенные и отталкивающие материалы</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Любые пугающие фото, видео, кружки и прочие данные запрещены.</li>
+                                    <li>Отталкивающие ресурсы любого характера обязательно отправляются под спойлер, кроме полностью запрещенных данных. Даже со спойлером администрация вынуждена выдать предупреждение, если в чат хауса попадает запрещенный контент.</li>
+                                    <li>Запрещен байт на шок-контент и порнографию (когда за обложкой скрывается что-то другое). Это касается любых форматов: видео, стикеров или GIF.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-12" data-category="chat" data-title="Поведение в чате">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">12</span><span><span class="category-title">Поведение в чате</span><span class="category-subtitle">Комфорт и спокойная атмосфера</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Неадекватное поведение, провокации, намеренное создание хаоса и нарушение общего комфорта в чате не приветствуются.</li>
+                                    <li>Постоянное привлечение внимания через конфликтное поведение также считается нарушением.</li>
+                                    <li>Если участник систематически мешает общению ребят, администрация вправе вмешаться.</li>
+                                </ol></div></div>
+                            </article>
+
+                            <article class="category-card" id="chat-cat-13" data-category="chat" data-title="Уважение к администрации">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">13</span><span><span class="category-title">Уважение к администрации</span><span class="category-subtitle">Взаимодействие с модерацией</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ol class="rules-list">
+                                    <li>Игнорирование или демонстративный отказ от выполнения просьб администрации ведет к немедленному исключению (бану).</li>
+                                    <li>Любые формы намеренного издевательства, оскорбительный сарказм в отношении действий модераторов или иные проявления неуважения строго наказуемы. Решения администрации обсуждению в общих чатах не подлежат.</li>
+                                </ol></div></div>
+                            </article>
+                        </div>
+                        <div class="empty-state" id="chatEmpty">Ничего не найдено. Попробуй изменить запрос.</div>
+                        <div class="notice">
+                            <span class="notice-icon" aria-hidden="true">♡</span>
+                            <div>На этом правила подошли к концу. При жалобах относительно нашего хауса обращайтесь к владельцу. Мы всегда готовы выслушать советы по улучшению проекта. Спасибо, что дочитали до конца!</div>
+                        </div>
+                    </div>
+
+                    <div class="section-view" id="workView" role="tabpanel" aria-labelledby="workTab">
+                        <header class="section-header">
+                            <p class="section-kicker">Раздел 02 · Развитие</p>
+                            <h2>Оценка работ</h2>
+                            <p class="section-description">
+                                Критерии помогают замечать сильные стороны работы и понимать, что можно улучшить на следующем этапе.
+                            </p>
+                        </header>
+
+                        <div class="notice">
+                            <span class="notice-icon" aria-hidden="true">✎</span>
+                            <div>
+                                <strong>Важное уточнение</strong><br>
+                                SUMI HOUSE — не школа и не полноценные курсы. Здесь нет систематического обучения по обязательной программе. Основная цель — поддержка и развитие через практику: помощь в выявлении ошибок, рекомендации по улучшению работ и подсказки для дальнейшего роста. Ответственность за обучение и прогресс в первую очередь лежит на самом участнике.
+                            </div>
+                        </div>
+
+                        <div class="notice">
+                            <span class="notice-icon" aria-hidden="true">♡</span>
+                            <div><strong>Оценка относительно группы</strong><br>Для каждого участника оценка проводится относительно его группы.</div>
+                        </div>
+
+                        <div class="category-list" id="workCategories">
+                            <article class="category-card" id="work-cat-1" data-category="work" data-title="Выполнение задания">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">01</span><span><span class="category-title">Выполнение задания</span><span class="category-subtitle">Понимание темы и условий</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Работа должна соответствовать теме и условиям задания.</li>
+                                    <li>Если было дано конкретное ограничение (например, поза, стиль, палитра, анатомия), оно должно быть соблюдено.</li>
+                                </ul><div class="rule-note">В оценку входит то, насколько участник понял задание и выполнил его.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-2" data-category="work" data-title="Аккуратность работы">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">02</span><span><span class="category-title">Аккуратность работы</span><span class="category-subtitle">Чистота и завершенность</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Линии должны быть читаемыми и уверенными.</li>
+                                    <li>Работа не должна выглядеть слишком небрежной или незаконченной без причины.</li>
+                                </ul><div class="rule-note">Оценивается чистота исполнения и общий уровень аккуратности.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-3" data-category="work" data-title="Анатомия и построение">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">03</span><span><span class="category-title">Анатомия и построение</span><span class="category-subtitle">Пропорции, форма и поза</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Проверяется логика построения тела, лица, рук и позы.</li>
+                                    <li>Учитываются пропорции, посадка частей тела и естественность.</li>
+                                    <li>Допустимы ошибки, но их сложность влияет на оценку.</li>
+                                </ul><div class="rule-note">Анатомия оценивается только в том случае, если вы рисуете строение объекта, существующего в реальной жизни. Также оцениваются знание строения определенных элементов и понимание формы.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-4" data-category="work" data-title="Композиция">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">04</span><span><span class="category-title">Композиция</span><span class="category-subtitle">Расположение объектов на холсте</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Объект должен быть грамотно размещен на листе или холсте, в зависимости от того, на чем вы рисуете.</li>
+                                    <li>Старайтесь не перегружать общее восприятие картинки и не создавать пустоту.</li>
+                                    <li>Важно, чтобы глаза легко считывали работу целиком.</li>
+                                </ul><div class="rule-note">Оценивается загруженность и общее восприятие работы.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-5" data-category="work" data-title="Цвет">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">05</span><span><span class="category-title">Цвет</span><span class="category-subtitle">Для цветных работ</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Цвета должны сочетаться между собой.</li>
+                                    <li>Обязательно учитывать тени, светотени и свет.</li>
+                                    <li>Случайный, неуместный подбор цветов снижает оценку.</li>
+                                </ul><div class="rule-note">Оценивается общая палитра работы и грамотность подобранных цветов.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-6" data-category="work" data-title="Свет и объем">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">06</span><span><span class="category-title">Свет и объём</span><span class="category-subtitle">Освещение, пространство и форма</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Должен быть источник света и соответствующие ему тени.</li>
+                                    <li>Учитывается понимание объёма и формы.</li>
+                                    <li>Даже простая работа должна иметь читаемую форму и силуэт.</li>
+                                </ul><div class="rule-note">Оцениваются объём, пространство и освещение.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-7" data-category="work" data-title="Самостоятельность">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">07</span><span><span class="category-title">Самостоятельность</span><span class="category-subtitle">Авторский подход и референсы</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Работа должна быть выполнена самим участником.</li>
+                                    <li>Допускается использование референсов, но без полного копирования чужой работы.</li>
+                                </ul><div class="rule-note">Оценивается самостоятельность и неподдельность в выполнении задания.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-8" data-category="work" data-title="Старательность">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">08</span><span><span class="category-title">Старательность</span><span class="category-subtitle">Усилия и заметный прогресс</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner"><ul class="rules-list">
+                                    <li>Учитывается, видны ли старания участника.</li>
+                                    <li>Учитывается, заметен ли прогресс.</li>
+                                </ul><div class="rule-note">Оцениваются отношение к заданию и итоговая работа сама по себе.</div></div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-9" data-category="work" data-title="Шкала оценки">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">09</span><span><span class="category-title">Шкала оценки</span><span class="category-subtitle">Как понимать итоговый балл</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner">
+                                    <div class="rating-scale">
+                                        <div class="rating-item"><span class="rating-score">10/10</span><span class="rating-description">Отлично, задание выполнено полностью, работа сделана идеально.</span></div>
+                                        <div class="rating-item"><span class="rating-score">8–9/10</span><span class="rating-description">Хорошая работа, есть мелкие ошибки.</span></div>
+                                        <div class="rating-item"><span class="rating-score">6–7/10</span><span class="rating-description">База есть, но заметны проблемы.</span></div>
+                                        <div class="rating-item"><span class="rating-score">4–5/10</span><span class="rating-description">Задание выполнено частично.</span></div>
+                                        <div class="rating-item"><span class="rating-score">1–3/10</span><span class="rating-description">Работа слабая или не соответствует заданию.</span></div>
+                                    </div>
+                                </div></div>
+                            </article>
+
+                            <article class="category-card" id="work-cat-10" data-category="work" data-title="Группы участников">
+                                <button class="category-toggle" type="button" aria-expanded="false">
+                                    <span class="category-title-wrap"><span class="category-index">10</span><span><span class="category-title">Группы участников</span><span class="category-subtitle">Уровень оценивается относительно группы</span></span></span><span class="chevron" aria-hidden="true">⌄</span>
+                                </button>
+                                <div class="category-content"><div class="category-inner">
+                                    <div class="group-grid">
+                                        <div class="group-card"><span class="group-label">Младшая</span><p>Для начинающих.</p></div>
+                                        <div class="group-card"><span class="group-label">Средняя</span><p>Для продолжающих.</p></div>
+                                        <div class="group-card"><span class="group-label">Старшая</span><p>Для продвинутых.</p></div>
+                                    </div>
+                                    <div class="rule-note">Распределение по группам происходит при вступлении в хаус. Для этого создана анкета, образец которой можно найти в Telegram-канале проекта.</div>
+                                </div></div>
+                            </article>
+                        </div>
+                        <div class="empty-state" id="workEmpty">Ничего не найдено. Попробуй изменить запрос.</div>
+                    </div>
+                </section>
             </div>
+        </main>
 
-            <article id="chat-cat-1" class="category-card">
-                <div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)">
-                    <h3 class="category-title">1. Общие положения</h3>
-                    <span class="category-icon">▼</span>
-                </div>
-                <div class="category-content">
-                    <ul class="rules-list">
-                        <li>Незнание правил не освобождает от ответственности.</li>
-                        <li>Полный текст конкретных правил необходимо добавить из исходного документа.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <div id="chat-cat-2" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">2. Оскорбления и агрессия</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-3" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">3. Спам и флуд</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-4" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">4. Реклама</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-5" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">5. Спорные темы</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-6" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">6. Нецензурная лексика</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-7" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">7. Пренебрежение</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-8" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">8. Обсуждение творчества</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-9" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">9. Личная информация</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-10" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">10. Тревожный контент</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-11" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">11. Шокирующий контент</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-12" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">12. Поведение в чате</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-            <div id="chat-cat-13" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">13. Администрация</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Текст этого пункта отсутствовал в присланном фрагменте. Вставь сюда исходные правила.</li></ul></div></div>
-
-            <footer class="footer">SUMI HOUSE • Спасибо, что помогаете сохранять дружелюбную атмосферу.</footer>
-        </section>
-
-        <section id="work-rules" class="content-section">
-            <div class="section-intro">
-                <h2>Оценка творческих работ</h2>
-                <p>Критерии ниже восстановлены по названиям из присланного фрагмента. Подробные описания и баллы нужно перенести из исходного документа.</p>
-            </div>
-
-            <div id="work-cat-1" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">1. Выполнение задания</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-            <div id="work-cat-2" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">2. Аккуратность работы</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-            <div id="work-cat-3" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">3. Анатомия и построение</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-            <div id="work-cat-4" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">4. Композиция</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-            <div id="work-cat-5" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">5. Цвет и палитра</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-            <div id="work-cat-6" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">6. Свет и объём</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-            <div id="work-cat-7" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">7. Самостоятельность</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-            <div id="work-cat-8" class="category-card"><div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)"><h3 class="category-title">8. Старательность</h3><span class="category-icon">▼</span></div><div class="category-content"><ul class="rules-list"><li>Добавь сюда описание критерия и условия начисления баллов.</li></ul></div></div>
-
-            <div id="work-scale" class="category-card">
-                <div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)">
-                    <h3 class="category-title">📝 Шкала оценок</h3>
-                    <span class="category-icon">▼</span>
-                </div>
-                <div class="category-content">
-                    <ul class="rules-list">
-                        <li>Добавь сюда шкалу оценок из исходного документа.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="work-groups" class="category-card">
-                <div class="category-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleCategory(this)" onkeydown="toggleCategoryKeyboard(event, this)">
-                    <h3 class="category-title">👥 Группы участников</h3>
-                    <span class="category-icon">▼</span>
-                </div>
-                <div class="category-content">
-                    <ul class="rules-list">
-                        <li>Добавь сюда описание групп участников из исходного документа.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <footer class="footer">SUMI HOUSE • Критерии оценки творческих работ</footer>
-        </section>
-    </main>
+        <footer class="footer">
+            <span><strong>SUMI HOUSE</strong> · Растём вместе, шаг за шагом.</span>
+            <a class="back-top" href="#top">↑ Наверх</a>
+        </footer>
+    </div>
 
     <script>
-        function switchSection(sectionId, button) {
-            document.querySelectorAll(".content-section").forEach(function (section) {
-                section.classList.remove("active");
-            });
+        (() => {
+            const tabButtons = [...document.querySelectorAll(".tab-button")];
+            const views = {
+                chat: document.getElementById("chatView"),
+                work: document.getElementById("workView")
+            };
+            const navList = document.getElementById("navList");
+            const navHeading = document.getElementById("navHeading");
+            const navCount = document.getElementById("navCount");
+            const searchInput = document.getElementById("searchInput");
+            const sidebar = document.getElementById("sidebar");
+            const mobileMenuButton = document.getElementById("mobileMenuButton");
+            let currentSection = "chat";
 
-            document.querySelectorAll(".nav-list").forEach(function (list) {
-                list.classList.remove("active");
-            });
-
-            document.querySelectorAll(".tab-btn").forEach(function (tab) {
-                tab.classList.remove("active");
-            });
-
-            const section = document.getElementById(sectionId);
-            const navList = document.getElementById("nav-" + sectionId);
-
-            if (!section || !navList || !button) {
-                return;
+            function cardsFor(section) {
+                return [...document.querySelectorAll(`.category-card[data-category="${section}"]`)];
             }
 
-            section.classList.add("active");
-            navList.classList.add("active");
-            button.classList.add("active");
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+            function renderNavigation(section) {
+                const cards = cardsFor(section);
+                navList.replaceChildren();
 
-        function toggleCategory(header) {
-            const card = header.parentElement;
-            const isOpen = card.classList.toggle("open");
-            header.setAttribute("aria-expanded", String(isOpen));
-        }
+                cards.forEach((card, index) => {
+                    const title = card.dataset.title || card.querySelector(".category-title")?.textContent.trim() || `Раздел ${index + 1}`;
+                    const item = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.className = "nav-link";
+                    link.href = `#${card.id}`;
+                    link.dataset.target = card.id;
 
-        function toggleCategoryKeyboard(event, header) {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                toggleCategory(header);
+                    const number = document.createElement("span");
+                    number.className = "nav-number";
+                    number.textContent = String(index + 1).padStart(2, "0");
+
+                    const label = document.createElement("span");
+                    label.textContent = title;
+
+                    link.append(number, label);
+                    link.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        const target = document.getElementById(card.id);
+                        target.classList.add("open");
+                        target.querySelector(".category-toggle").setAttribute("aria-expanded", "true");
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                        setActiveLink(card.id);
+                        sidebar.classList.remove("menu-open");
+                        mobileMenuButton.setAttribute("aria-expanded", "false");
+                        mobileMenuButton.textContent = "☰ Открыть навигацию";
+                    });
+
+                    item.append(link);
+                    navList.append(item);
+                });
+
+                navHeading.textContent = section === "chat" ? "Категории правил" : "Критерии оценки";
+                navCount.textContent = cards.length;
+                filterContent();
             }
-        }
 
-        document.querySelectorAll(".nav-link").forEach(function (link) {
-            link.addEventListener("click", function (event) {
-                const target = document.querySelector(link.getAttribute("href"));
+            function setActiveLink(id) {
+                navList.querySelectorAll(".nav-link").forEach(link => {
+                    link.classList.toggle("active", link.dataset.target === id);
+                });
+            }
 
-                if (!target) {
-                    event.preventDefault();
-                    return;
-                }
+            function switchSection(section) {
+                currentSection = section;
+                tabButtons.forEach(button => {
+                    const selected = button.dataset.section === section;
+                    button.classList.toggle("active", selected);
+                    button.setAttribute("aria-selected", String(selected));
+                    button.tabIndex = selected ? 0 : -1;
+                });
 
-                const section = target.closest(".content-section");
-                if (section && !section.classList.contains("active")) {
-                    const sectionButton = document.querySelector(
-                        '.tab-btn[onclick*="' + section.id + '"]'
-                    );
+                Object.entries(views).forEach(([key, view]) => {
+                    view.classList.toggle("active", key === section);
+                });
 
-                    if (sectionButton) {
-                        switchSection(section.id, sectionButton);
-                    }
-                }
+                searchInput.value = "";
+                renderNavigation(section);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
 
-                if (target.classList.contains("category-card") && !target.classList.contains("open")) {
-                    const header = target.querySelector(".category-header");
-                    if (header) {
-                        toggleCategory(header);
-                    }
+            function filterContent() {
+                const query = searchInput.value.trim().toLocaleLowerCase("ru");
+                let visibleCount = 0;
+
+                cardsFor(currentSection).forEach(card => {
+                    const text = (card.innerText || "").toLocaleLowerCase("ru");
+                    const matches = !query || text.includes(query);
+                    card.hidden = !matches;
+                    if (matches) visibleCount++;
+                });
+
+                const empty = document.getElementById(currentSection === "chat" ? "chatEmpty" : "workEmpty");
+                empty.classList.toggle("visible", visibleCount === 0);
+                navList.querySelectorAll("li").forEach(item => {
+                    const link = item.querySelector(".nav-link");
+                    const target = document.getElementById(link.dataset.target);
+                    item.hidden = target ? target.hidden : false;
+                });
+                navCount.textContent = visibleCount;
+            }
+
+            document.querySelectorAll(".category-toggle").forEach(button => {
+                button.addEventListener("click", () => {
+                    const card = button.closest(".category-card");
+                    const open = card.classList.toggle("open");
+                    button.setAttribute("aria-expanded", String(open));
+                    setActiveLink(card.id);
+                });
+            });
+
+            tabButtons.forEach(button => {
+                button.addEventListener("click", () => switchSection(button.dataset.section));
+            });
+
+            searchInput.addEventListener("input", filterContent);
+
+            mobileMenuButton.addEventListener("click", () => {
+                const open = sidebar.classList.toggle("menu-open");
+                mobileMenuButton.setAttribute("aria-expanded", String(open));
+                mobileMenuButton.textContent = open ? "✕ Закрыть навигацию" : "☰ Открыть навигацию";
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") {
+                    sidebar.classList.remove("menu-open");
+                    mobileMenuButton.setAttribute("aria-expanded", "false");
+                    mobileMenuButton.textContent = "☰ Открыть навигацию";
+                    searchInput.blur();
                 }
             });
-        });
+
+            renderNavigation("chat");
+            setActiveLink("chat-cat-1");
+        })();
     </script>
 </body>
 </html>
